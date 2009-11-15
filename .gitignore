@@ -1,2 +1,8 @@
 archlinux/settings_local.py
-*.pyc
+*.py[doc]
+*.{s,}o
+*.{l,}a
+*egg-info
+*~
+tags
+
