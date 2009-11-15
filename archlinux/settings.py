@@ -28,7 +28,7 @@ USE_I18N = True
 
 # Absolute path to the directory that holds media.
 MEDIA_ROOT = os.path.join(DEPLOY_PATH, 'media')
-MEDIA_URL = 'http://localhost:8000/media/'
+MEDIA_URL = '/media/'
 
 # URL prefix for admin media -- CSS, JavaScript and images. Make sure to use a
 # trailing slash.
