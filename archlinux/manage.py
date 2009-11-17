@@ -11,11 +11,11 @@ the filea settings.py does indeed exist, it's causing an ImportError
 somehow.)\n'''
 
 try:
-	import settings # Assumed to be in the same directory.
+    import settings # Assumed to be in the same directory.
 except ImportError:
-	import sys
-	sys.stderr.write(ERR_MSG % __file__)
-	sys.exit(1)
+    import sys
+    sys.stderr.write(ERR_MSG % __file__)
+    sys.exit(1)
 
 if __name__ == "__main__":
-	execute_manager(settings)
+    execute_manager(settings)
