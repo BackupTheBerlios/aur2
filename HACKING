@@ -1,0 +1,79 @@
+############################################
+############    Contributing    ############
+############################################
+
+
+0. About
+---------------------------
+
+ This document provides a few guidelines for contributing code to the AUR2
+ project.
+
+ Compliance with these guidelines will make upstream development easier, and
+ will make your code easier to integrate.
+
+
+1. Coding Style
+---------------------------
+
+ 1. All code should be indented with spaces. This is effectively the
+    following VIM modeline:
+
+        /* vim: set ai ts=4 sw=4 et: */
+
+ 2. Recommend removing trailing whitespace. Here is an example for .vimrc
+
+        autocmd BufWritePre *.py normal m`:%s/\s\+$//e ``
+
+ 3. Intentation for code is 4 spaces. No hard tabs should appear in source
+    files.
+
+
+2. Patch Submission
+---------------------------
+
+ The following patch formats are acceptable, and listed in order of preference.
+
+ 1. Use "git format-patch".
+
+    Git patches can be sent with "git send-email", or attached manually.
+
+ 2. Use "diff -Nur" to create patches.
+
+    Please try to make diff patches "p1 applicable".
+
+
+3. Source Code
+---------------------------
+
+ The source can be viewed via a web interface at the following url:
+ http://git.berlios.de/cgi-bin/gitweb.cgi?p=aur2;a=summary
+
+ The git repo can be cloned from one of the following two locations:
+ git://git.berlios.de/aur2
+ http://aur2.berlios.de/
+
+4. Authors File
+---------------------------
+
+ This project has an AUTHORS file. Author names should not appear in the source
+ files. Please add your name to the AUTHORS file if you make contributions.
+
+
+5. Additional Thoughts
+---------------------------
+
+ *  Don't get discouraged!
+
+    Any feedback you get, positive or negative, has nothing to do with you. If
+    a patch is rejected, try taking the suggestions into account and
+    re-submitting.
+
+ *  Be patient.
+
+    Some patches may take a bit longer to get looked over than others. If you
+    think your patch got lost in the shuffle, send another email in reply to
+    the original asking if anyone has looked at it yet.
+
+
+# vim: set ai ts=4 sw=4 et:
