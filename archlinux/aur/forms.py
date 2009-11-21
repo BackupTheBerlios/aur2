@@ -12,8 +12,8 @@ class PackageSearchForm(forms.Form):
     def __init__(self, *args, **kwargs):
         super(PackageSearchForm, self).__init__(*args, **kwargs)
         repository_choices = [('all', 'All')]
-        repository_choices += [(repository.name.lower(), repository.name) \
-                for repository in Repository.objects.all()]
+        for repository in Repository.objects.all:
+            repository_choices.append((repository.name.lower(), repository.name))
         self.fields['repository'].choices = repository_choices
 
     repository = forms.ChoiceField(initial='all', choices=(), required=False)
@@ -47,7 +47,8 @@ class PackageSearchForm(forms.Form):
         lastupdate = self.get_or_default('lastupdate')
         query = self.get_or_default('query')
 
-        # Find the packages by searching description, package name or maintainer
+        # Find the packages by searching the description and package name, or
+        # maintainer
         if query:
             if self.get_or_default('searchby') == 'maintainer':
                 results = Package.objects.filter(maintainers__username__icontains=query)
@@ -91,7 +92,8 @@ class PackageField(forms.FileField):
             pkg = PKGBUILD.Package(filename)
         except:
             raise forms.ValidationError(sys.exc_info()[1])
-        # Add path of the tarball/PKGBUILD we can reference in other places
+        # Add path of the tarball/PKGBUILD so we can reference in other
+        # places
         pkg['filename'] = filename
         # Validate PKGBUILD
         pkg.validate()
@@ -152,7 +154,7 @@ class PackageSubmitForm(forms.Form):
         package.release = pkg['release']
         package.description = pkg['description']
         package.url = pkg['url']
-        package.repository = Repository.objects.get(name__iexact = self.cleaned_data['repository'])
+        package.repository=Repository.objects.get(name__iexact=self.cleaned_data['repository'])
         # Save the package so we can reference it
         package.save()
         if creating:
@@ -231,10 +233,9 @@ class PackageSubmitForm(forms.Form):
             source_filename = pkg['source'][index]
             source = PackageFile(package=package)
             # If it's a local file, save to disk, otherwise record as url
-            if is_tarfile and os.path.exists(os.path.join(tmpdir_sources,
-               package.name, source_filename)):
-                fp = File(open(os.path.join(tmpdir_sources, pkg['name'],
-                        source_filename), "r"))
+            source_file = os.path.join(tmpdir_sources, package.name, source_filename)
+            if is_tarfile and os.path.exists(source_file):
+                fp = File(open(os.path.join(source_file), "r"))
                 source.filename.save('%(name)s/sources/' + source_filename, fp)
                 fp.close()
             else:
