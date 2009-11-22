@@ -1,4 +1,5 @@
 archlinux/settings_local.py
+archlinux/database.sqlite3
 *.py[doc]
 *.{s,}o
 *.{l,}a
