@@ -6,6 +6,15 @@
     <object pk="2" model="aur.architecture">
         <field type="CharField" name="name">x86_64</field>
     </object>
+    <object pk="3" model="aur.architecture">
+        <field type="CharField" name="name">any</field>
+    </object>
+    <object pk="1" model="aur.repository">
+        <field type="CharField" name="name">Unsupported</field>
+    </object>
+    <object pk="2" model="aur.repository">
+        <field type="CharField" name="name">Community</field>
+    </object>
     <object pk="1" model="aur.license">
         <field type="CharField" name="name">APACHE</field>
     </object>
@@ -53,11 +62,5 @@
     </object>
     <object pk="16" model="aur.license">
         <field type="CharField" name="name">RUBY</field>
-    </object>
-    <object pk="1" model="aur.repository">
-        <field type="CharField" name="name">Unsupported</field>
-    </object>
-    <object pk="2" model="aur.repository">
-        <field type="CharField" name="name">Community</field>
     </object>
 </django-objects>
