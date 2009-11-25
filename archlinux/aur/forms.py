@@ -12,8 +12,8 @@ class PackageSearchForm(forms.Form):
     def __init__(self, *args, **kwargs):
         super(PackageSearchForm, self).__init__(*args, **kwargs)
         repository_choices = [('all', 'All')]
-        for repository in Repository.objects.all:
-            repository_choices.append((repository.name.lower(), repository.name))
+        repository_choices += [(repository.name.lower(), repository.name)
+            for repository in Repository.objects.all()]
         self.fields['repository'].choices = repository_choices
 
     repository = forms.ChoiceField(initial='all', choices=(), required=False)
