@@ -95,8 +95,8 @@ class Package(models.Model):
     provides = models.ManyToManyField(Provision, null=True, blank=True)
     deleted = models.BooleanField(default=False)
     outdated = models.BooleanField(default=False)
-    added = models.DateTimeField(editable=False, default=datetime.now())
-    updated = models.DateTimeField()
+    added = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
     groups = models.ManyToManyField(Group, null=True, blank=True)
 
     def __unicode__(self):
@@ -115,7 +115,6 @@ class Package(models.Model):
     get_absolute_url = permalink(get_absolute_url)
 
     def save(self):
-        self.updated = datetime.now()
         if not self.slug:
             import re
             slug = re.sub('[^\w\s-]', '', self.name).strip().lower()
@@ -167,7 +166,7 @@ class Comment(models.Model):
     parent = models.ForeignKey('self', null=True, blank=True)
     user = models.ForeignKey(User)
     message = models.TextField()
-    added = models.DateTimeField(editable=False, default=datetime.now())
+    added = models.DateTimeField(auto_now_add=True)
     ip = models.IPAddressField()
     hidden = models.BooleanField(default=False)
 
