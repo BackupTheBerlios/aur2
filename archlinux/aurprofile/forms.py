@@ -4,8 +4,6 @@ from django.forms import ModelForm
 from registration.forms import RegistrationFormUniqueEmail
 from django.utils.translation import ugettext_lazy as _
 
-attrs_dict = { 'class': 'required' }
-
 class ProfileUpdateForm(ModelForm):
     """
     Some explanation for ProfileUpdateForm.
@@ -26,6 +24,8 @@ class ProfileUpdateForm(ModelForm):
         model = User
         fields = ('username', 'first_name', 'last_name', 'email')
 
-class AurRegistrationForm( RegistrationFormUniqueEmail ):
-    password2 = forms.CharField(widget=forms.PasswordInput(attrs=attrs_dict,
-        render_value=False),  label=_( "Confirm password" )
+class AurRegistrationForm(RegistrationFormUniqueEmail):
+    def __init__(self, *args, **kwargs):
+        super(AurRegistrationForm, self).__init__(*args, **kwargs)
+        self.fields['password2'].label = _("Confirm password")
+
