@@ -12,9 +12,6 @@
     <object pk="1" model="aur.repository">
         <field type="CharField" name="name">Unsupported</field>
     </object>
-    <object pk="2" model="aur.repository">
-        <field type="CharField" name="name">Community</field>
-    </object>
     <object pk="1" model="aur.license">
         <field type="CharField" name="name">APACHE</field>
     </object>
