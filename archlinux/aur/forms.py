@@ -97,8 +97,7 @@ class PackageField(forms.FileField):
             pkg = PKGBUILD.Package(filename)
         except:
             raise forms.ValidationError(sys.exc_info()[1])
-        # Add path of the tarball/PKGBUILD so we can reference in other
-        # places
+        # Add path of the tarball so we can reference in other places
         pkg['filename'] = filename
         # Validate PKGBUILD
         pkg.validate()
@@ -190,18 +189,10 @@ class PackageSubmitForm(forms.Form):
         for arch in pkg['arch']:
             object = Architecture.objects.get(name=arch)
             package.architectures.add(object)
-        # Check if the uploaded file is a tar file or just a PKGBUILD
-        try:
-            tar = tarfile.open(pkg['filename'], "r")
-        except tarfile.ReadError:
-            # It's not a tar file, so if must be a PKGBUILD since it validated
-            is_tarfile = False
-            pkgbuild = pkg['filename']
-        else:
-            is_tarfile = True
-            tmpdir_sources = os.path.join(tmpdir, 'sources')
-            tar.extractall(tmpdir_sources)
-            pkgbuild = os.path.join(tmpdir_sources, pkg['name'], 'PKGBUILD')
+        tar = tarfile.open(pkg['filename'], "r")
+        tmpdir_sources = os.path.join(tmpdir, 'sources')
+        tar.extractall(tmpdir_sources)
+        pkgbuild = os.path.join(tmpdir_sources, pkg['name'], 'PKGBUILD')
         # Remove all sources. It's easier and cleaner this way.
         if updating:
             PackageFile.objects.filter(package=pkg['name']).delete()
@@ -219,17 +210,6 @@ class PackageSubmitForm(forms.Form):
         # Save tarball
         # TODO: Tar the saved sources instead of using the uploaded one, for
         # security
-        if not is_tarfile:
-            # We only have the PKGBUILD, so lets make a tarball
-            try:
-                tarball_path = os.path.join(tmpdir, pkg['name'] + '.tar.gz')
-                tar = tarfile.open(str(tarball_path), "w|gz")
-                tar.add(pkg['filename'], '%s/PKGBUILD' % pkg['name'])
-                tar.close()
-                pkg['filename'] = os.path.join(tmpdir, '%s.tar.gz' % pkg['name'])
-            except:
-                transaction.rollback()
-                raise
         fp = File(open(pkg['filename'], "rb"))
         package.tarball.save(os.path.join('%(name)s', os.path.basename(pkg['filename'])), fp)
         fp.close()
@@ -239,7 +219,7 @@ class PackageSubmitForm(forms.Form):
             source = PackageFile(package=package)
             # If it's a local file, save to disk, otherwise record as url
             source_file = os.path.join(tmpdir_sources, package.name, source_filename)
-            if is_tarfile and os.path.exists(source_file):
+            if os.path.exists(source_file):
                 fp = File(open(source_file, "r"))
                 source.filename.save('%(name)s/sources/' + source_filename, fp)
                 fp.close()
