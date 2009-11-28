@@ -240,7 +240,7 @@ class PackageSubmitForm(forms.Form):
             # If it's a local file, save to disk, otherwise record as url
             source_file = os.path.join(tmpdir_sources, package.name, source_filename)
             if is_tarfile and os.path.exists(source_file):
-                fp = File(open(os.path.join(source_file), "r"))
+                fp = File(open(source_file, "r"))
                 source.filename.save('%(name)s/sources/' + source_filename, fp)
                 fp.close()
             else:
