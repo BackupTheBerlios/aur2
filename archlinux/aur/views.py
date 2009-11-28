@@ -3,6 +3,7 @@ import os
 import sys
 import tarfile
 import hashlib
+import datetime
 
 from django.shortcuts import render_to_response, get_object_or_404
 from django.http import HttpResponse, HttpResponseRedirect
@@ -12,6 +13,7 @@ from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
 from django.core import serializers
 from django.utils.translation import ugettext
+from django.db import IntegrityError
 
 from aur.models import *
 from aur.forms import PackageSearchForm, PackageSubmitForm
@@ -152,6 +154,28 @@ def notify_of_updates(request, object_id):
 def denotify_of_updates(request, object_id):
     """Unsubscribe a user from package updates"""
     PackageNotification.objects.get(package__name=object_id, user=request.user).delete()
+    return HttpResponseRedirect(reverse('aur-package_detail',
+        args=[object_id,]))
+
+@login_required
+def vote(request, object_id):
+    """Record a user's vote for a package"""
+    package = get_object_or_404(Package, name=object_id)
+    try:
+        Vote(package=package, user=request.user).save()
+    except IntegrityError: # Ignore the duplicate.  Voter fraud not allowed!
+        pass # Should we complain?
+    return HttpResponseRedirect(reverse('aur-package_detail',
+        args=[object_id,]))
+
+@login_required
+def unvote(request, object_id):
+    """Remove a user's vote for a package"""
+    package = get_object_or_404(Package, name=object_id)
+    try:
+        Vote.objects.get(package=package, user=request.user).delete()
+    except Vote.DoesNotExist:
+        pass
     return HttpResponseRedirect(reverse('aur-package_detail',
         args=[object_id,]))
 
