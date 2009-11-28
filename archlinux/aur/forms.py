@@ -4,7 +4,7 @@ from django.core.files import File
 from aur.models import *
 import aur.Package as PKGBUILD
 
-from registration.forms import RegistrationForm
+from registration.forms import RegistrationFormUniqueEmail
 from django.utils.translation import ugettext_lazy as _
 
 import os
@@ -270,6 +270,6 @@ class PackageSubmitForm(forms.Form):
                 os.rmdir(os.path.join(root, name))
         os.rmdir(tmpdir)
 
-class AurRegistrationForm( RegistrationForm ):
+class AurRegistrationForm( RegistrationFormUniqueEmail ):
     password2 = forms.CharField(widget=forms.PasswordInput(attrs=attrs_dict,
         render_value=False),  label=_( "Confirm password" ) )
