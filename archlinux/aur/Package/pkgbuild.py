@@ -38,8 +38,7 @@ class Package(UserDict):
         try:
             tar = tarfile.open(file, "r")
         except:
-            if os.path.basename(file) != "PKGBUILD":
-                raise
+            raise ValueError("file must be a tarball")
         else:
             to_extract = None
             for member in tar.getnames():
