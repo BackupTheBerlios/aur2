@@ -13,3 +13,6 @@ DATABASE_HOST = ''             # Set to empty string for localhost. Not used wit
 DATABASE_PORT = ''             # Set to empty string for default. Not used with sqlite3.
 
 SECRET_KEY = ''
+
+DEFAULT_FROM_EMAIL = 'your_email@doman.com' # Mail account which will send the registration email
+
