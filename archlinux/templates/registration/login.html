@@ -20,9 +20,14 @@
             <tr>
                 <td colspan="2" align="right">
                     <input type="hidden" name="next" value="{% if next %}{{ next }}{% else %}{% url aurprofile_profile %}{% endif %}" />
-                    <input type="submit" value="Login" />
+					<input type="submit" value="Login" />
                 </td>
-            </tr>
+			</tr>
+			<tr>
+				<td>
+					<a href="{% url auth_password_reset %}">{% trans "Forgot your password?"  %}</a >
+				</td>
+			</tr>
         </table>
     </form>
 </div>
