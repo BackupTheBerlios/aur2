@@ -20,11 +20,11 @@
 		<div>
 			<input type="hidden" name="next" value="{% if next %}{{ next }}{% else %}{% url aurprofile_profile %}{% endif %}" />
 		</div>
-		<div>
+		<div id="login_submit">
 			<input type="submit" value="Login" />
 		</div>
 		<div>
-			<a href="{% url auth_password_reset %}">{% trans "Forgot your password?"  %}</a >
+			<a href="{% url auth_password_reset %}">{% trans "Forgot your password?"  %}</a>
 		</div>
     </form>
 </div>

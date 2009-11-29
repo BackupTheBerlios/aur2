@@ -11,6 +11,17 @@ body {
 /*
  * Divs
  */
+
+.login_submit {
+	padding-left: 250px;
+}
+
+#login_form label {
+	width: 150px;
+	display: inline-block;
+	text-align: right;
+}
+
 #head_container {
 	height: 220px;
 }
@@ -125,6 +136,7 @@ body {
 	padding: 10px;
 	background: #f6efe0;
 	border: 1px solid #eee4cb;
+	margin: auto;
 }
 div.listing {
 	padding-right: 10px;
@@ -162,6 +174,7 @@ h2 {
 }
 h2.title {
 	border-bottom: 1px solid #46494d;
+	font-size: 16px;
 }
 h3 {
 	margin-bottom: 10px;
