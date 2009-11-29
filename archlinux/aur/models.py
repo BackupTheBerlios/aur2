@@ -187,7 +187,7 @@ class PackageNotification(models.Model):
 class Vote(models.Model):
     user = models.ForeignKey(User)
     package = models.ForeignKey(Package)
-    added = models.DateTimeField(auto_now=True)
+    added = models.DateTimeField(auto_now_add=True)
 
     def __unicode__(self):
         return u"%s's vote for %s" % (self.user.username,
