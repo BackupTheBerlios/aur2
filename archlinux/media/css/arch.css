@@ -12,14 +12,19 @@ body {
  * Divs
  */
 
-.login_submit {
+#login_submit {
 	padding-left: 250px;
 }
 
-#login_form label {
+#login_form label, #registration_form label {
 	width: 150px;
 	display: inline-block;
 	text-align: right;
+}
+
+#registration_submit {
+    padding-left: 90px;
+    padding-top: 10px;
 }
 
 #head_container {

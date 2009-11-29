@@ -3,7 +3,7 @@
 {% block content %}
 <div class="greybox">
     <h2 class="title">{% trans "Registration form" %}</h2>
-    <form method="post" action=".">
+    <form method="post" action="." id="registration_form">
         {% for field in form %}
 			<div>
 				{{ field.label_tag }}:
@@ -11,9 +11,10 @@
                 {% if field.errors %}{{ field.errors }}{% else %}&nbsp;{% endif %}
             </div>
 			{% endfor %}
-			<div>
-                <input type="submit" value="{% trans "Register" %}" /> <input type="reset" value="{% trans "Reset" %}" />
-            </div>
+			<div id="registration_submit">
+				<input type="submit" value="{% trans "Register" %}" />
+				<input type="reset" value="{% trans "Reset" %}" />
+			</div>
     </form>
 </div>
 {% endblock %}
