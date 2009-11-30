@@ -15,4 +15,5 @@ DATABASE_PORT = ''             # Set to empty string for default. Not used with 
 SECRET_KEY = ''
 
 DEFAULT_FROM_EMAIL = 'your_email@doman.com' # Mail account which will send the registration email
+CACHE_BACKEND = 'memcached://ip:port/' # You need to install memcached and its python binding to it
 
