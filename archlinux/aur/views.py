@@ -268,3 +268,7 @@ def api_package_comments(request, object_id):
     data = serializers.serialize('json', comments)
     return HttpResponse(data, mimetype="application/%s" % format)
 
+def delete_account(request):
+    user = request.user
+    user.delete()
+    return HttpResponse('Account deleted')
