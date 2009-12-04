@@ -77,10 +77,6 @@ OPENID_CREATE_USERS = True
 # data received via Simple Registration?
 OPENID_UPDATE_DETAILS_FROM_SREG = True
 
-# If set, always use this as the identity URL rather than asking the
-# user.  This only makes sense if it is a server URL.
-OPENID_SSO_SERVER_URL = 'https://login.launchpad.net/'
-
 # Tell django.contrib.auth to use the OpenID signin URLs.
 LOGIN_URL = '/openid/login'
 LOGIN_REDIRECT_URL = '/'
