@@ -62,7 +62,28 @@ INSTALLED_APPS = (
     'registration',
     'aurprofile',
     'tagging',
+    'django_openid_auth',
 )
+
+AUTHENTICATION_BACKENDS = (
+    'django_openid_auth.auth.OpenIDBackend',
+    'django.contrib.auth.backends.ModelBackend',
+)
+
+# Should users be created when new OpenIDs are used to log in?
+OPENID_CREATE_USERS = True
+
+# When logging in again, should we overwrite user details based on
+# data received via Simple Registration?
+OPENID_UPDATE_DETAILS_FROM_SREG = True
+
+# If set, always use this as the identity URL rather than asking the
+# user.  This only makes sense if it is a server URL.
+OPENID_SSO_SERVER_URL = 'https://login.launchpad.net/'
+
+# Tell django.contrib.auth to use the OpenID signin URLs.
+LOGIN_URL = '/openid/login'
+LOGIN_REDIRECT_URL = '/'
 
 # Third party settings
 
