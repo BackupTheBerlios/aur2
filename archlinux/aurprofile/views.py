@@ -64,7 +64,7 @@ def remember_me_login (
                 request.session.delete_test_cookie()
             return HttpResponseRedirect(redirect_to)
     else:
-        form = AuthenticationRememberMeForm(request,)
+        form = form_class(request,)
     request.session.set_test_cookie()
     if Site._meta.installed:
         current_site = Site.objects.get_current()
