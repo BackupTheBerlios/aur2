@@ -1,7 +1,6 @@
 from django.conf.urls.defaults import *
 from django.contrib import admin
 from django.conf import settings
-import aurprofile.forms
 import aurprofile.views
 
 admin.autodiscover()
@@ -9,8 +8,7 @@ admin.autodiscover()
 urlpatterns = patterns('',
     (r'^admin/(.*)', admin.site.root),
     (r'^accounts/register/$', 'registration.views.register',
-        {'backend': 'registration.backends.default.DefaultBackend',
-            'form_class': aurprofile.forms.AurRegistrationForm } ),
+        {'backend': 'registration.backends.default.DefaultBackend'}),
     (r'^accounts/login/$', 'aurprofile.views.remember_me_login',),
     (r'^accounts/', include('registration.backends.default.urls')),
     (r'^profile/', include('aurprofile.urls')),
