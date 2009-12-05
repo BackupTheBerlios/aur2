@@ -32,14 +32,14 @@ class AurRegistrationForm(RegistrationFormUniqueEmail):
         super(AurRegistrationForm, self).__init__(*args, **kwargs)
         self.fields['password2'].label = _("Confirm password")
 
-class AuthenticationRememberMeForm (AuthenticationForm):
+class AuthenticationRememberMeForm(AuthenticationForm):
 
     """
     Subclass of Django ``AuthenticationForm`` which adds a remember me checkbox.
 
     """
-    remember_me = forms.BooleanField (
-        label = _( 'Remember Me' ),
+    remember_me = forms.BooleanField(
+        label = _('Remember Me'),
         initial = False,
         required = False,
         )

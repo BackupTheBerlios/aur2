@@ -27,7 +27,7 @@ def profile(request):
     })
     return render_to_response('aurprofile/profile.html', context)
 
-def remember_me_login (
+def remember_me_login(
     request,
     template_name = 'registration/login.html',
     redirect_field_name = REDIRECT_FIELD_NAME,
@@ -48,19 +48,19 @@ def remember_me_login (
     from django.shortcuts import render_to_response
     from django.template import RequestContext
 
-    redirect_to = request.REQUEST.get (redirect_field_name, '')
+    redirect_to = request.REQUEST.get(redirect_field_name, '')
 
     if request.method == "POST":
-        form = AuthenticationRememberMeForm (data = request.POST,)
-        if form.is_valid ( ):
+        form = AuthenticationRememberMeForm(data = request.POST,)
+        if form.is_valid():
             # Light security check -- make sure redirect_to isn't garbage.
             if not redirect_to or '//' in redirect_to or ' ' in redirect_to:
                 redirect_to = settings.LOGIN_REDIRECT_URL
             if not form.cleaned_data [ 'remember_me' ]:
-                request.session.set_expiry (0)
+                request.session.set_expiry(0)
             from django.contrib.auth import login
             login (request, form.get_user())
-            if request.session.test_cookie_worked ():
+            if request.session.test_cookie_worked():
                 request.session.delete_test_cookie()
             return HttpResponseRedirect(redirect_to)
     else:
@@ -69,9 +69,9 @@ def remember_me_login (
     if Site._meta.installed:
         current_site = Site.objects.get_current()
     else:
-        current_site = RequestSite (request)
+        current_site = RequestSite(request)
 
-    return render_to_response (
+    return render_to_response(
             template_name,
             {
                 'form': form,
@@ -79,7 +79,7 @@ def remember_me_login (
                 'site': current_site,
                 'site_name': current_site.name,
                 },
-            context_instance = RequestContext (request),
+            context_instance = RequestContext(request),
             )
-remember_me_login = never_cache (remember_me_login)
+remember_me_login = never_cache(remember_me_login)
 
