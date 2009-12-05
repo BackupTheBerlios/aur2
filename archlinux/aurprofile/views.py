@@ -57,7 +57,7 @@ def remember_me_login(
             if not redirect_to or '//' in redirect_to or ' ' in redirect_to:
                 redirect_to = settings.LOGIN_REDIRECT_URL
             if not form.cleaned_data [ 'remember_me' ]:
-                request.session.set_expiry(0)
+                request.session.set_expiry(31536000)
             from django.contrib.auth import login
             login (request, form.get_user())
             if request.session.test_cookie_worked():
