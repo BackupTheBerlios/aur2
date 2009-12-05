@@ -34,12 +34,13 @@ TEMPLATE_LOADERS = (
 )
 
 MIDDLEWARE_CLASSES = (
+    'django.middleware.cache.UpdateCacheMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'django.middleware.cache.CacheMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.middleware.doc.XViewMiddleware',
     'django.middleware.transaction.TransactionMiddleware',
+    'django.middleware.cache.FetchFromCacheMiddleware',
 )
 
 ROOT_URLCONF = 'archlinux.urls'
@@ -65,21 +66,21 @@ INSTALLED_APPS = (
     'django_openid_auth',
 )
 
-AUTHENTICATION_BACKENDS = (
-    'django_openid_auth.auth.OpenIDBackend',
-    'django.contrib.auth.backends.ModelBackend',
-)
+# AUTHENTICATION_BACKENDS = (
+    # 'django_openid_auth.auth.OpenIDBackend',
+    # 'django.contrib.auth.backends.ModelBackend',
+# )
 
-# Should users be created when new OpenIDs are used to log in?
-OPENID_CREATE_USERS = True
+# # Should users be created when new OpenIDs are used to log in?
+# OPENID_CREATE_USERS = True
 
-# When logging in again, should we overwrite user details based on
-# data received via Simple Registration?
-OPENID_UPDATE_DETAILS_FROM_SREG = True
+# # When logging in again, should we overwrite user details based on
+# # data received via Simple Registration?
+# OPENID_UPDATE_DETAILS_FROM_SREG = True
 
-# Tell django.contrib.auth to use the OpenID signin URLs.
-LOGIN_URL = '/openid/login'
-LOGIN_REDIRECT_URL = '/'
+# # Tell django.contrib.auth to use the OpenID signin URLs.
+# LOGIN_URL = '/openid/login'
+# LOGIN_REDIRECT_URL = '/'
 
 # Third party settings
 
