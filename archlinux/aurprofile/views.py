@@ -47,6 +47,11 @@ def remember_me_login(
     from django.http import HttpResponseRedirect
     from django.shortcuts import render_to_response
     from django.template import RequestContext
+    from django.views.generic.simple import redirect_to
+    from django.core.urlresolvers import reverse
+
+    if request.user.is_authenticated( ):
+        return redirect_to(request, reverse("aur-main"))
 
     redirect_to = request.REQUEST.get(redirect_field_name, '')
 
