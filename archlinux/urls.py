@@ -7,7 +7,7 @@ from aur.feeds import RssLatestPackages, AtomLatestPackages
 
 admin.autodiscover()
 
-feeds = {
+feeds_packages = {
     'rss': RssLatestPackages
     # 'atom': AtomLatestPackages,
 }
@@ -21,8 +21,8 @@ urlpatterns = patterns('',
     (r'^profile/', include('aurprofile.urls')),
     (r'^', include('aur.urls')),
     (r'^openid/', include('django_openid_auth.urls')),
-    (r'^feeds/(?P<url>.*)/$', 'django.contrib.syndication.views.feed',
-        {'feed_dict': feeds}),
+    (r'^feeds/(?P<url>.*)/packages/$', 'django.contrib.syndication.views.feed',
+        {'feed_dict': feeds_packages}),
 )
 
 if settings.DEBUG == True:
