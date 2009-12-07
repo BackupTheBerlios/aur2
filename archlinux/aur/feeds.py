@@ -22,8 +22,8 @@ class RssLatestPackages(Feed):
         """
 
     def items(self):
-        # return Package.objects.order_by('-pub_date')[:5]
-        return Package.objects.all()
+        return Package.objects.all()[:20]
+
 
 class AtomLatestPackages(RssLatestPackages):
     feed_type = Atom1Feed
