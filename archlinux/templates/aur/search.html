@@ -76,12 +76,22 @@ url aur:/feeds/rss %}" />{% endblock %}
         <tr class="{% cycle 'pkgr1' 'pkgr2' %}">
             <td>{{ package.repository }}</td>
             <td><a{% if package.outdated %} class="error"{% endif %} href="{{ package.get_absolute_url }}">{{ package.name }} {{ package.version }}-{{ package.release }}</a></td>
-            <td>{{ package.description }}</td>
-            <td>{{ package.maintainers.all|join:", " }}</td>
-            <td>{{ package.updated|date:"Y-m-d H:i:s" }}</td>
-            {% if is_moderator %}
-            <td><input type="checkbox" name="packages" value="{{ package.name }}" /></td>
-            {% endif %}
+			<td>{{ package.description }}</td>
+                {% if user.is_authenticated %}
+                    <td>
+                        {% for maintainer in package.maintainers.all %}
+                        <a href="{{ maintainer.get_absolute_url }}">{{ maintainer }}</a>{% if not forloop.last %}, {% endif %}
+                        {% endfor %}
+                    </td>
+                {% else %}
+                    <td>
+                        {{ package.maintainers.all|join:", " }}
+                    </td>
+                {% endif %}
+                <td>{{ package.updated|date:"Y-m-d H:i:s" }}</td>
+                {% if is_moderator %}
+                    <td><input type="checkbox" name="packages" value="{{ package.name }}" /></td>
+                {% endif %}
         </tr>
         {% endfor %}
         {% else %}
