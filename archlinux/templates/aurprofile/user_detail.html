@@ -5,6 +5,7 @@
 
 <div class="greybox">
     <h3>{% trans "Account Details" %}</h3>
+	{% if user.is_authenticated %}
 	<div >
 		Registered: {{ user.date_joined|date:"Y-m-d" }}
 	</div>
@@ -24,5 +25,10 @@
 	<div >
 		Email address: <a href="mailto:{{ user.email }}">{{ user.email }}</a>
 	</div>
+	{% else %}
+		<div>
+			You must log in to view user information.
+		</div>
+	{% endif %}
 </div>
 {% endblock %}
