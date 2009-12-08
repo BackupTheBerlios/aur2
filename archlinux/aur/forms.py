@@ -7,6 +7,9 @@ import aur.Package as PKGBUILD
 import os
 import sys
 
+from registration.backends.default import DefaultBackend
+from django.contrib.auth.models import Group
+
 class PackageSearchForm(forms.Form):
     # Borrowed from AUR2-BR
     def __init__(self, *args, **kwargs):
@@ -244,3 +247,9 @@ class PackageSubmitForm(forms.Form):
             for name in dirs:
                 os.rmdir(os.path.join(root, name))
         os.rmdir(tmpdir)
+
+class AddGroupDefaultBackend(DefaultBackend):
+    def register(self, *args, **kwargs):
+        new_user = super(AddGroupDefaultBackend, self).register(*args, **kwargs)
+        new_user.groups.add(Group.objects.get(name = 'User'))
+        return new_user

@@ -21,7 +21,7 @@ info_dict = {
 urlpatterns = patterns('',
     (r'^admin/(.*)', admin.site.root),
     (r'^accounts/register/$', 'registration.views.register',
-        {'backend': 'registration.backends.default.DefaultBackend'}),
+        {'backend': 'aur.forms.AddGroupDefaultBackend'}),
     (r'^accounts/login/$', 'aurprofile.views.remember_me_login',),
     (r'^accounts/', include('registration.backends.default.urls')),
     (r'^profile/', include('aurprofile.urls')),
