@@ -32,7 +32,8 @@ urlpatterns = patterns('',
     (r'^feeds/(?P<url>.*)/packages/$', 'django.contrib.syndication.views.feed',
         {'feed_dict': feeds_packages}),
     (r'^users/(?P<slug>\w+)/$',
-            'django.views.generic.list_detail.object_detail', info_dict)
+            'django.views.generic.list_detail.object_detail', info_dict),
+    (r'^users/(?P<user>\w+)/packages', 'aur.views.user_packages')
 )
 
 if settings.DEBUG == True:

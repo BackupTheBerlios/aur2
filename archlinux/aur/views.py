@@ -14,6 +14,7 @@ from django.core.urlresolvers import reverse
 from django.core import serializers
 from django.utils.translation import ugettext
 from django.db import IntegrityError
+from django.views.generic.list_detail import object_list
 
 from aur.models import *
 from aur.forms import PackageSearchForm, PackageSubmitForm
@@ -272,3 +273,7 @@ def delete_account(request):
     user = request.user
     user.delete()
     return HttpResponse('Account deleted')
+
+def user_packages(request, user):
+    user = get_object_or_404(User, username=user)
+    return object_list(request, user.package_set.all())
