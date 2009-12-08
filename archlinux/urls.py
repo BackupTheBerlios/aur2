@@ -2,7 +2,7 @@ from django.conf.urls.defaults import *
 from django.contrib import admin
 from django.conf import settings
 import aurprofile.views
-
+from django.contrib.auth.models import User
 from aur.feeds import RssLatestPackages, AtomLatestPackages
 
 admin.autodiscover()
@@ -10,6 +10,12 @@ admin.autodiscover()
 feeds_packages = {
     'rss': RssLatestPackages
     # 'atom': AtomLatestPackages,
+}
+
+info_dict = {
+    'queryset': User.objects.all(),
+    'slug_field': 'username',
+    'template_name' : 'aurprofile/user_detail.html'
 }
 
 urlpatterns = patterns('',
@@ -23,6 +29,8 @@ urlpatterns = patterns('',
     (r'^openid/', include('django_openid_auth.urls')),
     (r'^feeds/(?P<url>.*)/packages/$', 'django.contrib.syndication.views.feed',
         {'feed_dict': feeds_packages}),
+    (r'^users/(?P<slug>\w+)/$',
+            'django.views.generic.list_detail.object_detail', info_dict)
 )
 
 if settings.DEBUG == True:

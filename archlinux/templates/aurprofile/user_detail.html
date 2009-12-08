@@ -1,0 +1,28 @@
+{% extends "base-sidebar.html" %}
+{% load i18n %}
+{% block extra_title %} - {% trans "My Profile" %}{% endblock %}
+{% block content_left %}
+
+<div class="greybox">
+    <h3>{% trans "Account Details" %}</h3>
+	<div >
+		Registered: {{ user.date_joined|date:"Y-m-d" }}
+	</div>
+	<div >
+		Username: {{ user.username }}
+	</div>
+	<div >
+		First name: {{ user.first_name }}
+	</div>
+	<div >
+		Last name: {{ user.last_name }}
+	</div>
+	<div >
+		Account Type:
+		{% for group in user.groups.all %} {{ group.name }} {% endfor %}
+	</div>
+	<div >
+		Email address: <a href="mailto:{{ user.email }}">{{ user.email }}</a>
+	</div>
+</div>
+{% endblock %}
