@@ -1,6 +1,7 @@
 from django.conf.urls.defaults import *
 from django.contrib import admin
 from django.conf import settings
+import aurprofile.forms
 import aurprofile.views
 from django.contrib.auth.models import User
 from aur.feeds import RssLatestPackages, AtomLatestPackages
@@ -21,7 +22,8 @@ info_dict = {
 urlpatterns = patterns('',
     (r'^admin/(.*)', admin.site.root),
     (r'^accounts/register/$', 'registration.views.register',
-        {'backend': 'aur.forms.AddGroupDefaultBackend'}),
+        {'backend': 'aur.forms.AddGroupDefaultBackend',
+            'form_class': aurprofile.forms.AurRegistrationForm } ),
     (r'^accounts/login/$', 'aurprofile.views.remember_me_login',),
     (r'^accounts/', include('registration.backends.default.urls')),
     (r'^profile/', include('aurprofile.urls')),
