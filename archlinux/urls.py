@@ -33,7 +33,8 @@ urlpatterns = patterns('',
         {'feed_dict': feeds_packages}),
     (r'^users/(?P<slug>\w+)/$',
             'django.views.generic.list_detail.object_detail', info_dict),
-    (r'^users/(?P<user>\w+)/packages', 'aur.views.user_packages')
+    (r'^users/(?P<user>\w+)/packages', 'aur.views.user_packages'),
+    (r'^i18n/', include('django.conf.urls.i18n')),
 )
 
 if settings.DEBUG == True:
