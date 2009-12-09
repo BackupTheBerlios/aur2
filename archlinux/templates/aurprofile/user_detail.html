@@ -25,6 +25,10 @@
 	<div >
 		Email address: <a href="mailto:{{ user.email }}">{{ user.email }}</a>
 	</div>
+	<div>
+		<a href="{% url aur.views.user_packages user.username %}">View this user's packages</a></td>
+
+	</div>
 	{% else %}
 		<div>
 			You must log in to view user information.
