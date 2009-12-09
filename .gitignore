@@ -7,3 +7,4 @@ archlinux/database.sqlite3
 *~
 tags
 *.swp
+*.patch
