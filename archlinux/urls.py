@@ -13,12 +13,6 @@ feeds_packages = {
     # 'atom': AtomLatestPackages,
 }
 
-info_dict = {
-    'queryset': User.objects.all(),
-    'slug_field': 'username',
-    'template_name' : 'aurprofile/user_detail.html'
-}
-
 urlpatterns = patterns('',
     (r'^admin/(.*)', admin.site.root),
     (r'^accounts/register/$', 'registration.views.register',
@@ -31,8 +25,6 @@ urlpatterns = patterns('',
     (r'^openid/', include('django_openid_auth.urls')),
     (r'^feeds/(?P<url>.*)/packages/$', 'django.contrib.syndication.views.feed',
         {'feed_dict': feeds_packages}),
-    (r'^users/(?P<slug>\w+)/$',
-            'django.views.generic.list_detail.object_detail', info_dict),
     (r'^users/(?P<user>\w+)/packages', 'aur.views.user_packages'),
     (r'^i18n/', include('django.conf.urls.i18n')),
     (r'^jsi18n/(?P<packages>\S+?)/$', 'django.views.i18n.javascript_catalog'),
