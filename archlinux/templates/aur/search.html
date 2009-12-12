@@ -49,7 +49,8 @@ href="/feeds/rss/packages" />{% endblock %}
     <table class="results" width="100%">
         <tr>
             {% if not request.META.QUERY_STRING %}
-                <th><a href="{% url aur-search %}?sortby=repository&order=desc">{% trans "Repository" %}</a></th>
+                <th><a href="{% url aur-search %}?sortby=architectures&order=desc">{% trans "Arch" %}</a></th>
+                <th><a href="{% url aur-search %}?sortby=repository&order=desc">{% trans "Repo" %}</a></th>
                 <th><a href="{% url aur-search %}?sortby=name&order=desc">{% trans "Name" %}</a></th>
                 <th><a href="{% url aur-search %}?sortby=version&order=desc">{% trans "Version" %}</a></th>
                 <th><a href="{% url aur-search %}?sortby=description&order=desc">{% trans "Description" %}</a></th>
@@ -60,7 +61,8 @@ href="/feeds/rss/packages" />{% endblock %}
                 {% endif %}
             {% else %}
                 {% ifequal request.GET.order "asc" %}
-                    <th><a href="{% url aur-search %}?{{ request.META.QUERY_STRING|merge_query_string:"sortby=repository&order=desc"}}">{% trans "Repository" %}</a></th>
+                    <th><a href="{% url aur-search %}?{{ request.meta.query_string|merge_query_string:"sortby=architectures&order=desc"}}">{% trans "Arch" %}</a></th>
+                    <th><a href="{% url aur-search %}?{{ request.meta.query_string|merge_query_string:"sortby=repository&order=desc"}}">{% trans "repository" %}</a></th>
                     <th><a href="{% url aur-search %}?{{ request.META.QUERY_STRING|merge_query_string:"sortby=name&order=desc"}}">{% trans "Name" %}</a></th>
                     <th><a href="{% url aur-search %}?{{
 							request.META.QUERY_STRING|merge_query_string:"sortby=version&order=desc"}}">{% trans "Version" %}</a></th>
@@ -68,7 +70,8 @@ href="/feeds/rss/packages" />{% endblock %}
                     <th>{% trans "Maintainer" %}</th>
                     <th style="width: 9em"><a href="{% url aur-search %}?{{ request.META.QUERY_STRING|merge_query_string:"sortby=updated&order=desc"}}">{% trans "Last Updated" %}</a></th>
                 {% else %}
-                    <th><a href="{% url aur-search %}?{{ request.META.QUERY_STRING|merge_query_string:"sortby=repository&order=asc"}}">{% trans "Repository" %}</a></th>
+                    <th><a href="{% url aur-search %}?{{ request.META.QUERY_STRING|merge_query_string:"sortby=architectures&order=asc"}}">{% trans "Arch" %}</a></th>
+                    <th><a href="{% url aur-search %}?{{ request.META.QUERY_STRING|merge_query_string:"sortby=repository&order=asc"}}">{% trans "Repo" %}</a></th>
                     <th><a href="{% url aur-search %}?{{ request.META.QUERY_STRING|merge_query_string:"sortby=name&order=asc"}}">{% trans "Name" %}</a></th>
                     <th><a href="{% url aur-search %}?{{
 							request.META.QUERY_STRING|merge_query_string:"sortby=version&order=asc"}}">{% trans "Version" %}</a></th>
@@ -84,6 +87,7 @@ href="/feeds/rss/packages" />{% endblock %}
         {% ifnotequal packages.count 0 %}
         {% for package in packages %}
         <tr class="{% cycle 'pkgr1' 'pkgr2' %}">
+			<td>{% for arch in package.architectures.all %}{{ arch }}{% endfor %}</td>
 			<td>{{ package.repository }}</td>
 			<td><a href="{{ package.get_absolute_url }}">{{ package.name }} </a></td>
             <td><span {% if package.outdated %} class="error"{% endif %}>{{ package.version }}-{{ package.release }}</span></td>
