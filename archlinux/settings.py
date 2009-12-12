@@ -64,6 +64,7 @@ INSTALLED_APPS = (
     'aurprofile',
     'tagging',
     'django_openid_auth',
+    'django.contrib.comments',
 )
 
 # AUTHENTICATION_BACKENDS = (
