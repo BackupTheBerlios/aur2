@@ -68,7 +68,7 @@
         <tr>
             <td valign="top">
                 <div class="listing">
-                    <h4>{% trans "Dependencies" %}:</h4>
+					<h4>{% trans "Dependencies" %} ({{pkg.depends.all|length}}):</h4>
                     <ul style="font-size:small;list-style:none">
                     {% ifnotequal pkg.depends.all.count 0 %}
                         {% for dep in pkg.depends.all %}
