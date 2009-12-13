@@ -25,7 +25,7 @@ urlpatterns = patterns('',
     (r'^openid/', include('django_openid_auth.urls')),
     (r'^feeds/(?P<url>.*)/packages/$', 'django.contrib.syndication.views.feed',
         {'feed_dict': feeds_packages}),
-    url(r'^users/(?P<object_id>\w+)/$',  'aurprofile.views.user_details', name =
+    url(r'^profile/(?P<object_id>\w+)/$',  'aurprofile.views.user_details', name =
         'user_details'),
     (r'^users/(?P<user>\w+)/packages', 'aur.views.user_packages'),
     (r'^i18n/', include('django.conf.urls.i18n')),
