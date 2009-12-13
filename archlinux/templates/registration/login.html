@@ -22,7 +22,7 @@
 			{{ form.remember_me }}
 		</div>
 		<div>
-			<input type="hidden" name="next" value="{% if next %}{{ next }}{% else %}{% url aurprofile_profile %}{% endif %}" />
+			<input type="hidden" name="next" value="{% if next %}{{ next }}{% else %}/{% endif %}" />
 		</div>
 		<div id="login_submit">
 			<input type="submit" value="Login" />
