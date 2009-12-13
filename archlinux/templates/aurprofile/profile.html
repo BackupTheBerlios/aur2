@@ -70,8 +70,14 @@
         <table class="aurprofile_details">
 			<tr>
 				<td >Registered: </td>
-				<td >
+				<td>
 					{{ user.date_joined|date:"Y-m-d" }}
+				</td>
+			</tr>
+			<tr>
+				<td>Acc. Type: </td>
+				<td>
+					{% for group in user.groups.all %} {{ group.name }} {% endfor %}
 				</td>
 			</tr>
 			{% for field in form %}
