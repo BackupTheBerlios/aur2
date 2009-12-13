@@ -2,3 +2,4 @@ Django>=1.0
 django-registration>=0.8
 django-openid-auth>=0.1
 -e svn+http://django-tagging.googlecode.com/svn/trunk/#egg=tagging
+south>=6.2

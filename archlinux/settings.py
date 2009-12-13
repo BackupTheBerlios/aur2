@@ -65,6 +65,7 @@ INSTALLED_APPS = (
     'tagging',
     'django_openid_auth',
     'django.contrib.comments',
+    'south',
 )
 
 # AUTHENTICATION_BACKENDS = (
