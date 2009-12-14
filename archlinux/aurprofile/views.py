@@ -95,9 +95,3 @@ def remember_me_login(
             context_instance = RequestContext(request),
             )
 remember_me_login = never_cache(remember_me_login)
-
-@login_required
-def user_details(request, object_id):
-    return object_detail(request, queryset = User.objects.all(), slug =
-            object_id, template_object_name = 'pkg', template_name =
-            'aurprofile/user_detail.html', slug_field = 'username')
