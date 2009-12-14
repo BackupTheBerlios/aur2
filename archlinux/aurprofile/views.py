@@ -12,15 +12,21 @@ from aurprofile.forms import AuthenticationRememberMeForm
 
 from django.views.generic.list_detail import object_detail
 
+
 @login_required
-def profile(request):
-    packages = Package.objects.filter(maintainers=request.user)
+def profile(request, username):
+    try:
+        user = User.objects.get(username=username)
+    except User.DoesNotExist:
+        raise Http404
+
+    packages = Package.objects.filter(maintainers=user)
     if request.method == 'POST':
-        form = ProfileUpdateForm(request.POST, instance=request.user)
+        form = ProfileUpdateForm(request.POST, instance=user)
         if form.is_valid():
             form.save()
     else:
-        form = ProfileUpdateForm(instance=request.user)
+        form = ProfileUpdateForm(instance=user)
     count_packages_ood = packages.filter(outdated=True).count()
     context = RequestContext(request, {
         'packages': packages,
