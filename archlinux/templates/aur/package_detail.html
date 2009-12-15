@@ -129,7 +129,7 @@
     {% for comment in comments %}
     <span style="float:right; font-size:x-small">{{ comment.submit_date|date }}
         {{ comment.submit_date|time }}</span>
-	<h4 class="news"><a href="{% url user_details comment.user.username %}">{{ comment.user }}</a></h4>
+	<h4 class="news"><a href="{% url aurprofile_profile comment.user.username %}">{{ comment.user }}</a></h4>
     <p class="news">{{ comment.comment }}</p>
     <br />
     {% if not forloop.last %}<br />{% endif %}
