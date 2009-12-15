@@ -50,7 +50,7 @@
             </tr>{% endif %}<tr>
 			<th>{% trans "Maintainer" %}:</th>
 			<td>{% for maintainer in pkg.maintainers.all %}
-				<a href="{% url user_details maintainer %}">{{ maintainer }}</a>
+				<a href="{% url aurprofile_profile maintainer %}">{{ maintainer }}</a>
 			{% endfor %}</td>
         </tr><tr>
             <th>{% trans "Votes" %}:</th>
